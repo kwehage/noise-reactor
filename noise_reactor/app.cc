@@ -47,6 +47,7 @@ App::App(QWidget* parent) : QMainWindow(parent) {
 
     build_menu();
     build_layout();
+    statusBar()->setStyleSheet("QStatusBar { border: none; }");
     statusBar()->showMessage("Ready");
 }
 
@@ -199,8 +200,7 @@ void App::build_layout() {
     // ── Timeline ──────────────────────────────────────────────────────────
     auto* timeline_widget = new QWidget(central_widget);
     timeline_widget->setFixedHeight(76);
-    timeline_widget->setStyleSheet(
-        "background-color: #161616; border-top: 1px solid #2a2a2a;");
+    timeline_widget->setStyleSheet("background-color: #161616;");
     {
         auto* timeline_layout = new QVBoxLayout(timeline_widget);
         timeline_layout->setContentsMargins(8, 4, 8, 4);
