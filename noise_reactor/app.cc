@@ -126,12 +126,11 @@ void App::build_layout() {
             auto* group = new QGroupBox(spec.name);
             group->setCheckable(true);
             group->setChecked(false);
+            group->setFlat(true);  // starts collapsed: no frame, just the title line
             auto* group_layout = new QVBoxLayout(group);
-            group_layout->setContentsMargins(6, 2, 6, 6);
+            group_layout->setContentsMargins(0, 0, 0, 0);  // no padding when collapsed
             group_layout->setSpacing(4);
 
-            // Slider rows live in a child widget so they can be hidden/shown
-            // as a unit when the group checkbox is toggled.
             auto* rows_widget = new QWidget();
             rows_widget->setVisible(false);
             auto* rows_layout = new QVBoxLayout(rows_widget);
@@ -157,18 +156,28 @@ void App::build_layout() {
             auto* intensity_slider = add_row("Intensity", 50);
             add_row("Smoothing", 30);
 
-            connect(group, &QGroupBox::toggled, rows_widget, &QWidget::setVisible);
+            auto field = spec.field;
+            connect(group, &QGroupBox::toggled, this,
+                    [this, group, group_layout, rows_widget, intensity_slider, field](bool checked) {
+                        rows_widget->setVisible(checked);
+                        group->setFlat(!checked);
+                        group_layout->setContentsMargins(
+                            checked ? 6 : 0, 0, checked ? 6 : 0, checked ? 6 : 0);
+                        if (field) {
+                            effect_params_.*field = checked
+                                ? intensity_slider->value() / 100.f : 0.f;
+                            update_time_label(scrubber_->value());
+                        }
+                    });
 
-            if (spec.field) {
-                auto field = spec.field;
-                auto refresh = [this, group, intensity_slider, field]() {
-                    effect_params_.*field = group->isChecked()
-                        ? intensity_slider->value() / 100.f
-                        : 0.f;
-                    update_time_label(scrubber_->value());
-                };
-                connect(group,            &QGroupBox::toggled,    this, [refresh](bool) { refresh(); });
-                connect(intensity_slider, &QSlider::valueChanged, this, [refresh](int)  { refresh(); });
+            if (field) {
+                connect(intensity_slider, &QSlider::valueChanged, this,
+                        [this, group, intensity_slider, field](int) {
+                            if (group->isChecked()) {
+                                effect_params_.*field = intensity_slider->value() / 100.f;
+                                update_time_label(scrubber_->value());
+                            }
+                        });
             }
 
             parameter_layout->addWidget(group);
