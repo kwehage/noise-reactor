@@ -26,7 +26,6 @@ static QShader load_shader(const char* filename) {
 }
 
 PreviewWidget::PreviewWidget(QWidget* parent) : QRhiWidget(parent) {
-    setApi(QRhiWidget::Api::Vulkan);
     setMinimumSize(640, 360);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }

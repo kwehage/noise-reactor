@@ -30,6 +30,8 @@ static void apply_dark_theme(QApplication& app) {
 
 int main(int argc, char* argv[]) {
     qputenv("QT_RHI_BACKEND", "vulkan");
+    qputenv("QT_LOGGING_RULES", "qt.multimedia.ffmpeg=false");
+    qputenv("PIPEWIRE_DEBUG", "0");  // suppress SPA/PipeWire parse warnings on stderr
     QApplication app(argc, argv);
     apply_dark_theme(app);
 
