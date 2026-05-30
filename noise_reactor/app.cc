@@ -200,7 +200,7 @@ void App::build_layout() {
 
     // ── Timeline ──────────────────────────────────────────────────────────
     auto* timeline_widget = new QWidget(central_widget);
-    timeline_widget->setFixedHeight(76);
+    timeline_widget->setFixedHeight(102);
     timeline_widget->setStyleSheet("background-color: #161616;");
     {
         auto* timeline_layout = new QVBoxLayout(timeline_widget);
@@ -208,7 +208,7 @@ void App::build_layout() {
         timeline_layout->setSpacing(4);
 
         waveform_widget_ = new WaveformWidget();
-        waveform_widget_->setFixedHeight(26);
+        waveform_widget_->setFixedHeight(52);
         timeline_layout->addWidget(waveform_widget_);
 
         connect(waveform_widget_, &WaveformWidget::seek_requested, this, [this](int ms) {
