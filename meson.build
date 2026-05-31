@@ -17,19 +17,28 @@ _qt_ver = qt6_dep.version()
 rhi_inc = include_directories(_qt_inc / 'QtGui' / _qt_ver / 'QtGui')
 
 # ── GLSL → QSB (Qt shader bundle) ────────────────────────────────────────────
-qsb = find_program('/usr/lib/qt6/bin/qsb', required : true)
-rcc = find_program(['/usr/lib/qt6/rcc', 'rcc'], required : true)
+# qsb lives in Qt's private bin dir on Linux; on other platforms it's in PATH.
+qsb = find_program(['/usr/lib/qt6/bin/qsb', 'qsb6', 'qsb'], required : true)
+rcc = find_program(['/usr/lib/qt6/rcc', '/usr/lib/qt6/bin/rcc', 'rcc6', 'rcc'], required : true)
 
+# --spirv embeds SPIR-V alongside GLSL so Qt's D3D11/Metal backends can
+# cross-compile to HLSL/MSL at runtime via the built-in SPIRV-Cross.
 vert_qsb = custom_target('image_vert_qsb',
   input   : 'shaders/image.vert',
   output  : 'image.vert.qsb',
-  command : [qsb, '--glsl', '300 es,330', '-o', '@OUTPUT@', '@INPUT@'],
+  command : [qsb, '--glsl', '300 es,330', '--spirv', '-o', '@OUTPUT@', '@INPUT@'],
 )
 
 frag_qsb = custom_target('image_frag_qsb',
   input   : 'shaders/image.frag',
   output  : 'image.frag.qsb',
-  command : [qsb, '--glsl', '300 es,330', '-o', '@OUTPUT@', '@INPUT@'],
+  command : [qsb, '--glsl', '300 es,330', '--spirv', '-o', '@OUTPUT@', '@INPUT@'],
+)
+
+composite_qsb = custom_target('composite_frag_qsb',
+  input   : 'shaders/composite.frag',
+  output  : 'composite.frag.qsb',
+  command : [qsb, '--glsl', '300 es,330', '--spirv', '-o', '@OUTPUT@', '@INPUT@'],
 )
 
 # Copy the QRC into the build directory so rcc resolves the .qsb references
@@ -44,7 +53,7 @@ shader_res = custom_target('shader_resources',
   input   : shader_qrc,
   output  : 'qrc_shaders.cpp',
   command : [rcc, '@INPUT@', '--name', 'shaders', '-o', '@OUTPUT@'],
-  depends : [vert_qsb, frag_qsb],
+  depends : [vert_qsb, frag_qsb, composite_qsb],
 )
 
 # ── C++ sources ───────────────────────────────────────────────────────────────
@@ -72,4 +81,5 @@ executable('noise_reactor',
   shader_res,
   dependencies    : [qt6_dep, sndfile_dep, fftw3f_dep],
   include_directories : [inc, rhi_inc],
+  install         : true,
 )

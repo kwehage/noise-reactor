@@ -9,8 +9,11 @@
 
 class QRhiBuffer;
 class QRhiGraphicsPipeline;
+class QRhiRenderPassDescriptor;
 class QRhiSampler;
 class QRhiShaderResourceBindings;
+class QRhiTexture;
+class QRhiTextureRenderTarget;
 
 namespace noise_reactor {
 
@@ -49,13 +52,24 @@ private:
     void prepare_upload();
     void rebuild_bindings();
     void rebuild_pipeline();
+    void rebuild_composite_bindings();
+    void rebuild_composite_pipeline();
 
+    // Image + effect resources
     QRhi*                       rhi_{nullptr};
     QRhiTexture*                texture_{nullptr};
     QRhiSampler*                sampler_{nullptr};
     QRhiBuffer*                 uniform_buffer_{nullptr};
     QRhiShaderResourceBindings* bindings_{nullptr};
     QRhiGraphicsPipeline*       pipeline_{nullptr};
+
+    // Feedback / two-pass resources
+    QRhiTexture*                scene_texture_{nullptr};   // current frame rendered here
+    QRhiTexture*                feedback_texture_{nullptr}; // previous frame, fed back into shader
+    QRhiTextureRenderTarget*    scene_rt_{nullptr};
+    QRhiRenderPassDescriptor*   scene_rp_desc_{nullptr};
+    QRhiShaderResourceBindings* composite_bindings_{nullptr};
+    QRhiGraphicsPipeline*       composite_pipeline_{nullptr};
 
     QImage    source_image_{};
     QImage    pending_image_{};  // possibly Y-flipped for current backend

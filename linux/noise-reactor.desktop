@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Noise Reactor
+Comment=Music-reactive visuals from a static image and an audio file
+Exec=noise_reactor
+Icon=noise-reactor
+Type=Application
+Categories=AudioVideo;Audio;Video;

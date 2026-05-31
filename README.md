@@ -18,19 +18,50 @@ The timeline scrubber lets you preview any moment of the audio-visual sync befor
 
 All effects are off by default. Enable any combination with the checkboxes in the right panel.
 
+Each enabled effect exposes two sliders:
+
+- **Intensity** — how strongly the effect reacts to the audio.
+- **Feedback** — controls what the effect reads as its source. At 0 it reads the base image; at 1 it reads the output of the previous rendered frame; in between it blends the two. Setting feedback above 0 causes an effect to feed back on its own output across frames, producing accumulation and self-reinforcing loops. UV warp effects with feedback zoom or distort the previous frame rather than the source image, which creates infinite tunnel and liquid-metal effects. Colour and texture effects with feedback apply to the previous frame's colours, which causes saturation, brightness, glows, and similar effects to accumulate over time.
+
+The **Trails** effect is complementary to per-effect feedback: rather than changing what an effect reads, Trails blends the final rendered output with the previous frame using an audio-reactive decay — trails fade faster when the audio is louder. This prevents runaway accumulation and gives the feedback loop a natural rhythm. Trails and per-effect feedback can be combined freely.
+
+### UV warp effects
+
+These distort the sampling coordinates before the image is read. The **Warp Scale** slider at the top of the effects panel is a global frequency multiplier that applies to Wave Warp, Displacement Warp, Perlin Warp, and Polar Warp simultaneously — higher values produce finer, more textural distortion.
+
 | Effect | What it reacts to |
 |---|---|
-| **Warp Scale** | Global frequency multiplier for all warp effects — higher values produce finer, more textural distortion |
 | **Wave Warp** | Sinusoidal UV distortion driven by bass |
 | **Displacement Warp** | Independent X/Y sinusoidal displacement driven by bass |
 | **Perlin Warp** | Smooth noise-field distortion driven by mids |
+| **Barrel Lens** | Radial lens distortion — bass pushes edges outward |
+| **Ripple** | Radial sine waves emanating from center, driven by bass |
+| **Polar Warp** | Converts to polar coordinates and perturbs radius by angle, driven by mids |
+| **Kaleidoscope** | Folds the frame into 6 mirrored segments; rotation speed scales with intensity |
 | **Pixelate** | UV quantization — bass pulses the block size |
 | **Zoom Pulse** | Radial zoom driven by RMS and beat events |
+
+### Colour effects
+
+| Effect | What it reacts to |
+|---|---|
 | **Hue Shift** | Rotates image hue based on spectral centroid |
 | **Saturation** | Pumps colour saturation with RMS |
 | **Brightness** | Flashes luminance on beats, scales with RMS |
+| **Posterize** | Quantizes colours to fewer levels on high spectral flux |
+| **Solarize** | Inverts pixels above an RMS-driven brightness threshold (Sabattier effect) |
+| **Duotone** | Remaps the image to two complementary hues derived from spectral centroid — the palette shifts with frequency content |
+| **Channel Swap** | Rotates R→G→B colour channels on beat and onset events |
+
+### Glow, texture, and atmosphere
+
+| Effect | What it reacts to |
+|---|---|
 | **Glow** | Multi-sample bloom driven by RMS |
-| **Edge Glow** | Sobel edge detection lit by RMS |
+| **Edge Glow** | Sobel edge detection — edges expand and brighten with bass and beats |
+| **Emboss** | Directional relief highlight driven by treble; angle rotates slowly over time |
+| **Erode / Dilate** | Morphological effect — loud audio dilates (grows) bright regions, quiet audio erodes (shrinks) them |
+| **Scanlines** | Horizontal darkening bands; depth pulses with bass |
 | **Vignette** | Edge darkening that pulses with RMS |
 | **Chroma Split** | Radial R/B channel separation driven by treble and onsets |
 | **Film Grain** | Temporal noise scaled by spectral flux |

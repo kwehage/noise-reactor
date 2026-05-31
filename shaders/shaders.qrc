@@ -3,5 +3,6 @@
     <qresource prefix="/shaders">
         <file>image.vert.qsb</file>
         <file>image.frag.qsb</file>
+        <file>composite.frag.qsb</file>
     </qresource>
 </RCC>

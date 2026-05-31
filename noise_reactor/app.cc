@@ -127,23 +127,36 @@ void App::build_layout() {
 
         struct EffectSpec {
             const char*           name;
-            float EffectParams::* field;  // null = not yet implemented
+            float EffectParams::* field;
+            float EffectParams::* feedback_field;  // null = no feedback slider
         };
         const EffectSpec specs[] = {
-            {"Wave Warp",         &EffectParams::wave_intensity},
-            {"Displacement Warp", &EffectParams::displacement_intensity},
-            {"Perlin Warp",       &EffectParams::perlin_intensity},
-            {"Pixelate",          &EffectParams::pixelate_intensity},
-            {"Zoom Pulse",        &EffectParams::zoom_intensity},
-            {"Hue Shift",         &EffectParams::hue_shift_intensity},
-            {"Saturation",        &EffectParams::saturation_intensity},
-            {"Brightness",        &EffectParams::brightness_intensity},
-            {"Glow",              &EffectParams::glow_intensity},
-            {"Edge Glow",         &EffectParams::edge_glow_intensity},
-            {"Vignette",          &EffectParams::vignette_intensity},
-            {"Chroma Split",      &EffectParams::chromatic_intensity},
-            {"Film Grain",        &EffectParams::film_grain_intensity},
-            {"Glitch",            &EffectParams::glitch_intensity},
+            {"Wave Warp",         &EffectParams::wave_intensity,         &EffectParams::wave_feedback},
+            {"Displacement Warp", &EffectParams::displacement_intensity, &EffectParams::displacement_feedback},
+            {"Perlin Warp",       &EffectParams::perlin_intensity,       &EffectParams::perlin_feedback},
+            {"Barrel Lens",       &EffectParams::barrel_intensity,       &EffectParams::barrel_feedback},
+            {"Ripple",            &EffectParams::ripple_intensity,       &EffectParams::ripple_feedback},
+            {"Polar Warp",        &EffectParams::polar_intensity,        &EffectParams::polar_feedback},
+            {"Kaleidoscope",      &EffectParams::kaleidoscope_intensity, &EffectParams::kaleidoscope_feedback},
+            {"Pixelate",          &EffectParams::pixelate_intensity,     &EffectParams::pixelate_feedback},
+            {"Zoom Pulse",        &EffectParams::zoom_intensity,         &EffectParams::zoom_feedback},
+            {"Hue Shift",         &EffectParams::hue_shift_intensity,    &EffectParams::hue_shift_feedback},
+            {"Saturation",        &EffectParams::saturation_intensity,   &EffectParams::saturation_feedback},
+            {"Brightness",        &EffectParams::brightness_intensity,   &EffectParams::brightness_feedback},
+            {"Posterize",         &EffectParams::posterize_intensity,    &EffectParams::posterize_feedback},
+            {"Solarize",          &EffectParams::solarize_intensity,     &EffectParams::solarize_feedback},
+            {"Duotone",           &EffectParams::duotone_intensity,      &EffectParams::duotone_feedback},
+            {"Channel Swap",      &EffectParams::channel_swap_intensity, &EffectParams::channel_swap_feedback},
+            {"Glow",              &EffectParams::glow_intensity,         &EffectParams::glow_feedback},
+            {"Edge Glow",         &EffectParams::edge_glow_intensity,    &EffectParams::edge_glow_feedback},
+            {"Emboss",            &EffectParams::emboss_intensity,       &EffectParams::emboss_feedback},
+            {"Erode / Dilate",    &EffectParams::morph_intensity,        &EffectParams::morph_feedback},
+            {"Scanlines",         &EffectParams::scanline_intensity,     &EffectParams::scanline_feedback},
+            {"Vignette",          &EffectParams::vignette_intensity,     &EffectParams::vignette_feedback},
+            {"Chroma Split",      &EffectParams::chromatic_intensity,    &EffectParams::chromatic_feedback},
+            {"Film Grain",        &EffectParams::film_grain_intensity,   &EffectParams::film_grain_feedback},
+            {"Glitch",            &EffectParams::glitch_intensity,       &EffectParams::glitch_feedback},
+            {"Trails",            &EffectParams::feedback_intensity,     nullptr},
         };
 
         const char* slider_style =
@@ -205,7 +218,9 @@ void App::build_layout() {
             };
 
             auto* intensity_slider = add_row("Intensity", 50);
-            add_row("Smoothing", 30);
+            QSlider* feedback_slider = nullptr;
+            if (spec.feedback_field)
+                feedback_slider = add_row("Feedback", 0);
 
             connect(checkbox, &QCheckBox::toggled, rows_widget, &QWidget::setVisible);
 
@@ -223,6 +238,14 @@ void App::build_layout() {
                                 effect_params_.*field = intensity_slider->value() / 100.f;
                                 update_time_label(static_cast<int>(media_player_->position()));
                             }
+                        });
+            }
+            auto fb_field = spec.feedback_field;
+            if (fb_field && feedback_slider) {
+                connect(feedback_slider, &QSlider::valueChanged, this,
+                        [this, feedback_slider, fb_field](int) {
+                            effect_params_.*fb_field = feedback_slider->value() / 100.f;
+                            update_time_label(static_cast<int>(media_player_->position()));
                         });
             }
 
