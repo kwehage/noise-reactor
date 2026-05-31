@@ -125,6 +125,29 @@ sudo dnf install meson ninja-build qt6-qtbase-devel vulkan-headers \
 
 ---
 
+## Download
+
+Pre-built binaries are available on the [Releases](../../releases) page.
+
+### Linux (AppImage)
+
+Download `noise-reactor-<version>-linux-x86_64.AppImage`, then:
+
+```bash
+chmod +x noise-reactor-*-linux-x86_64.AppImage
+./noise-reactor-*-linux-x86_64.AppImage
+```
+
+No installation required. The AppImage is self-contained and runs on Ubuntu 24.04 and later (and compatible distros with glibc 2.39+).
+
+### Windows
+
+Download `noise-reactor-<version>-windows-x86_64.zip`, extract the folder, and run `noise_reactor.exe` inside it. No installer — all required DLLs are included in the zip.
+
+Windows may show a SmartScreen warning ("Windows protected your PC") the first time you run an unsigned executable. Click **More info → Run anyway** to proceed.
+
+---
+
 ## Build
 
 ```bash
