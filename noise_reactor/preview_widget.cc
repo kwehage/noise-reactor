@@ -132,7 +132,7 @@ void PreviewWidget::prepare_upload() {
     // OpenGL NDC has Y-up so (0,0) maps to bottom-left — flip required.
     if (!source_image_.isNull() && rhi_)
         pending_image_ = rhi_->isYUpInNDC()
-            ? source_image_.flipped(Qt::Vertical)
+            ? source_image_.mirrored(false, true)
             : source_image_;
     else
         pending_image_ = source_image_;

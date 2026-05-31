@@ -103,7 +103,9 @@ jobs:
         run: |
           for var in host_bins bindir libexecdir host_libexecs; do
             d=$(pkg-config --variable=$var Qt6Core 2>/dev/null)
-            [ -n "$d" ] && cygpath -w "$d" >> $GITHUB_PATH
+            if [ -n "$d" ]; then
+              cygpath -w "$d" >> $GITHUB_PATH
+            fi
           done
 
       - name: Build
