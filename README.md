@@ -1,14 +1,14 @@
-# Kaos Reactor
+# kaos::reactor
 
 A desktop tool that turns an audio file and a static image into a music-reactive visual.
 
-![Kaos Reactor](doc/kaos_reactor.png)
+![kaos::reactor](doc/kaos_reactor.png)
 
 ---
 
 ## How it works
 
-Kaos Reactor analyzes the audio offline before playback begins. It runs a 2048-point FFT at 60 fps hops and extracts per-frame features — RMS energy, bass / mid / treble band energy, spectral centroid, spectral flux, beat events, and onset events. Those features are packed into a GPU uniform buffer each frame and drive a Vulkan fragment shader that applies effects in real time to the source image.
+kaos::reactor analyzes the audio offline before playback begins. It runs a 2048-point FFT at 60 fps hops and extracts per-frame features — RMS energy, bass / mid / treble band energy, spectral centroid, spectral flux, beat events, and onset events. Those features are packed into a GPU uniform buffer each frame and drive a Vulkan fragment shader that applies effects in real time to the source image.
 
 The timeline scrubber lets you preview any moment of the audio-visual sync before committing to an export. Export pipes raw RGBA frames to ffmpeg via stdin, muxing the original audio into the final MP4.
 

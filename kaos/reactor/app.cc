@@ -45,7 +45,7 @@
 namespace kaos::reactor {
 
 App::App(QWidget* parent) : QMainWindow(parent) {
-    setWindowTitle("Kaos Reactor");
+    setWindowTitle("kaos::reactor");
     setMinimumSize(1280, 720);
 
     analysis_watcher_ = new QFutureWatcher<AudioAnalysis>(this);
