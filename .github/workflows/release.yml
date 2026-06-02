@@ -48,11 +48,11 @@ jobs:
         run: |
           # Icon
           mkdir -p AppDir/usr/share/icons/hicolor/256x256/apps
-          cp doc/noise_reactor.png AppDir/usr/share/icons/hicolor/256x256/apps/noise-reactor.png
+          cp doc/kaos_reactor.png AppDir/usr/share/icons/hicolor/256x256/apps/kaos-reactor.png
 
           # Desktop file
           mkdir -p AppDir/usr/share/applications
-          cp linux/noise-reactor.desktop AppDir/usr/share/applications/
+          cp linux/kaos-reactor.desktop AppDir/usr/share/applications/
 
           # Download linuxdeploy + Qt plugin (both must be in the same directory
           # so linuxdeploy can discover the plugin by name)
@@ -67,11 +67,11 @@ jobs:
             --plugin qt \
             --output appimage
 
-          mv Noise_Reactor*.AppImage noise-reactor-${{ github.ref_name }}-linux-x86_64.AppImage
+          mv Kaos_Reactor*.AppImage kaos-reactor-${{ github.ref_name }}-linux-x86_64.AppImage
 
       - uses: softprops/action-gh-release@v2
         with:
-          files: noise-reactor-*.AppImage
+          files: kaos-reactor-*.AppImage
 
   # ── Windows → zip ────────────────────────────────────────────────────────────
   build-windows:
@@ -116,16 +116,16 @@ jobs:
 
       - name: Stage distribution
         run: |
-          DIST=noise-reactor-${{ github.ref_name }}-windows-x86_64
+          DIST=kaos-reactor-${{ github.ref_name }}-windows-x86_64
           mkdir -p $DIST
 
-          cp build/noise_reactor.exe $DIST/
+          cp build/kaos-reactor.exe $DIST/
 
           # Qt DLLs and platform plugins
-          windeployqt6 --no-translations $DIST/noise_reactor.exe
+          windeployqt6 --no-translations $DIST/kaos-reactor.exe
 
           # MinGW runtime and third-party DLLs (libsndfile, fftw, libstdc++, etc.)
-          ldd build/noise_reactor.exe \
+          ldd build/kaos-reactor.exe \
             | grep '/mingw64/' \
             | awk '{ print $3 }' \
             | xargs -I{} cp {} $DIST/
@@ -133,9 +133,9 @@ jobs:
       - name: Zip distribution
         shell: pwsh
         run: |
-          $dist = "noise-reactor-${{ github.ref_name }}-windows-x86_64"
+          $dist = "kaos-reactor-${{ github.ref_name }}-windows-x86_64"
           Compress-Archive -Path $dist -DestinationPath "${dist}.zip"
 
       - uses: softprops/action-gh-release@v2
         with:
-          files: noise-reactor-*.zip
+          files: kaos-reactor-*.zip

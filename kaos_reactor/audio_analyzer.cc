@@ -1,4 +1,4 @@
-#include "noise_reactor/audio_analyzer.h"
+#include "kaos_reactor/audio_analyzer.h"
 
 #include <algorithm>
 #include <cmath>
@@ -7,7 +7,7 @@
 #include <fftw3.h>
 #include <numeric>
 
-namespace noise_reactor {
+namespace kaos::reactor {
 
 namespace {
 
@@ -197,4 +197,4 @@ AudioAnalysis AudioAnalyzer::analyze(const AudioFile& file, Config cfg) {
     return out;
 }
 
-} // namespace noise_reactor
+} // namespace kaos::reactor

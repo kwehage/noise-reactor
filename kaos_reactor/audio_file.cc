@@ -1,8 +1,8 @@
-#include "noise_reactor/audio_file.h"
+#include "kaos_reactor/audio_file.h"
 
 #include <sndfile.h>
 
-namespace noise_reactor {
+namespace kaos::reactor {
 
 std::optional<AudioFile> AudioFile::load(const std::filesystem::path& path) {
     SF_INFO info{};
@@ -49,4 +49,4 @@ void AudioFile::mix_to_mono() {
     }
 }
 
-} // namespace noise_reactor
+} // namespace kaos::reactor

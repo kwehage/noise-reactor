@@ -2,7 +2,7 @@
 
 #include <vector>
 
-namespace noise_reactor {
+namespace kaos::reactor {
 
 struct FrameData {
     float rms{0.f};               // normalized loudness [0, 1]
@@ -16,4 +16,4 @@ struct FrameData {
     std::vector<float> spectrum;  // FFT magnitudes, fft_size/2+1 bins (raw, not normalized)
 };
 
-} // namespace noise_reactor
+} // namespace kaos::reactor

@@ -1,4 +1,4 @@
-project('noise-reactor', 'cpp',
+project('kaos-reactor', 'cpp',
   version : '0.0.1',
   default_options : ['cpp_std=c++20', 'warning_level=2'])
 
@@ -83,24 +83,24 @@ shader_res = custom_target('shader_resources',
 
 # ── C++ sources ───────────────────────────────────────────────────────────────
 sources = files(
-  'noise_reactor/main.cc',
-  'noise_reactor/app.cc',
-  'noise_reactor/audio_file.cc',
-  'noise_reactor/audio_analyzer.cc',
-  'noise_reactor/preview_widget.cc',
-  'noise_reactor/waveform_widget.cc',
-  'noise_reactor/cinematic_target_widget.cc',
+  'kaos_reactor/main.cc',
+  'kaos_reactor/app.cc',
+  'kaos_reactor/audio_file.cc',
+  'kaos_reactor/audio_analyzer.cc',
+  'kaos_reactor/preview_widget.cc',
+  'kaos_reactor/waveform_widget.cc',
+  'kaos_reactor/cinematic_target_widget.cc',
 )
 
 moc_files = qt6.preprocess(
-  moc_headers     : ['noise_reactor/app.h', 'noise_reactor/preview_widget.h',
-                     'noise_reactor/waveform_widget.h',
-                     'noise_reactor/cinematic_target_widget.h'],
+  moc_headers     : ['kaos_reactor/app.h', 'kaos_reactor/preview_widget.h',
+                     'kaos_reactor/waveform_widget.h',
+                     'kaos_reactor/cinematic_target_widget.h'],
   include_directories : inc,
   dependencies    : qt6_dep,
 )
 
-executable('noise_reactor',
+executable('kaos-reactor',
   sources,
   moc_files,
   shader_res,

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "noise_reactor/audio_analysis.h"
+#include "kaos_reactor/audio_analysis.h"
 
 #include <QWidget>
 #include <vector>
 
-namespace noise_reactor {
+namespace kaos::reactor {
 
 class WaveformWidget : public QWidget {
     Q_OBJECT
@@ -31,4 +31,4 @@ private:
     float              position_{0.f};
 };
 
-} // namespace noise_reactor
+} // namespace kaos::reactor

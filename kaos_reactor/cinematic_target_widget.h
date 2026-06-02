@@ -3,7 +3,7 @@
 #include <QPointF>
 #include <QWidget>
 
-namespace noise_reactor {
+namespace kaos::reactor {
 
 class CinematicTargetWidget : public QWidget {
     Q_OBJECT
@@ -29,4 +29,4 @@ private:
     QPointF target_{0.5f, 0.5f};
 };
 
-} // namespace noise_reactor
+} // namespace kaos::reactor

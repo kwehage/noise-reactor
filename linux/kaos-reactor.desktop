@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=Noise Reactor
+Name=Kaos Reactor
 Comment=Music-reactive visuals from a static image and an audio file
-Exec=noise_reactor
-Icon=noise-reactor
+Exec=kaos-reactor
+Icon=kaos-reactor
 Type=Application
 Categories=AudioVideo;Audio;Video;

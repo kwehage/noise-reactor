@@ -1,11 +1,11 @@
-#include "noise_reactor/waveform_widget.h"
+#include "kaos_reactor/waveform_widget.h"
 
 #include <QMouseEvent>
 #include <QPainter>
 
 #include <algorithm>
 
-namespace noise_reactor {
+namespace kaos::reactor {
 
 WaveformWidget::WaveformWidget(QWidget* parent) : QWidget(parent) {
     setCursor(Qt::PointingHandCursor);
@@ -76,4 +76,4 @@ int WaveformWidget::pixel_to_ms(int x) const {
     return static_cast<int>(t * duration_ms_);
 }
 
-} // namespace noise_reactor
+} // namespace kaos::reactor

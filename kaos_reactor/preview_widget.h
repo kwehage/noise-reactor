@@ -1,7 +1,7 @@
 #pragma once
 
-#include "noise_reactor/audio_frame_data.h"
-#include "noise_reactor/effect_params.h"
+#include "kaos_reactor/audio_frame_data.h"
+#include "kaos_reactor/effect_params.h"
 
 #include <QImage>
 #include <QPoint>
@@ -15,7 +15,7 @@ class QRhiShaderResourceBindings;
 class QRhiTexture;
 class QRhiTextureRenderTarget;
 
-namespace noise_reactor {
+namespace kaos::reactor {
 
 class PreviewWidget : public QRhiWidget {
     Q_OBJECT
@@ -88,4 +88,4 @@ private:
     float     time_{0.f};
 };
 
-} // namespace noise_reactor
+} // namespace kaos::reactor

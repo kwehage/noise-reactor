@@ -1,9 +1,9 @@
 #pragma once
 
-#include "noise_reactor/audio_analysis.h"
-#include "noise_reactor/audio_file.h"
+#include "kaos_reactor/audio_analysis.h"
+#include "kaos_reactor/audio_file.h"
 
-namespace noise_reactor {
+namespace kaos::reactor {
 
 class AudioAnalyzer {
 public:
@@ -19,4 +19,4 @@ public:
     static AudioAnalysis analyze(const AudioFile& file, Config cfg);
 };
 
-} // namespace noise_reactor
+} // namespace kaos::reactor

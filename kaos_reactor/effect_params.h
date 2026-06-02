@@ -2,7 +2,7 @@
 
 #include <cstddef>
 
-namespace noise_reactor {
+namespace kaos::reactor {
 
 struct EffectParams {
     float zoom_intensity{0.0f};
@@ -144,4 +144,4 @@ struct EffectUBO {
 };
 static_assert(sizeof(EffectUBO) == 304, "EffectUBO size must match GLSL std140 layout");
 
-} // namespace noise_reactor
+} // namespace kaos::reactor

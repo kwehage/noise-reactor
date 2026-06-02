@@ -1,4 +1,4 @@
-#include "noise_reactor/app.h"
+#include "kaos_reactor/app.h"
 
 #include <QApplication>
 #include <QColor>
@@ -40,7 +40,7 @@ int main(int argc, char* argv[]) {
     parser.addOption({"audio", "Audio file to load at startup.", "path"});
     parser.process(app);
 
-    noise_reactor::App window;
+    kaos::reactor::App window;
     window.show();
 
     if (parser.isSet("image") || parser.isSet("audio")) {

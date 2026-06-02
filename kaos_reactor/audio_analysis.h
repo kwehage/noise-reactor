@@ -1,10 +1,10 @@
 #pragma once
 
-#include "noise_reactor/audio_frame_data.h"
+#include "kaos_reactor/audio_frame_data.h"
 
 #include <vector>
 
-namespace noise_reactor {
+namespace kaos::reactor {
 
 struct AudioAnalysis {
     std::vector<FrameData> frames;
@@ -25,4 +25,4 @@ struct AudioAnalysis {
     }
 };
 
-} // namespace noise_reactor
+} // namespace kaos::reactor

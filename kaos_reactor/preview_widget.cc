@@ -1,4 +1,4 @@
-#include "noise_reactor/preview_widget.h"
+#include "kaos_reactor/preview_widget.h"
 
 #include <QDragEnterEvent>
 #include <QDropEvent>
@@ -15,7 +15,7 @@
 #include <algorithm>
 #include <cmath>
 
-namespace noise_reactor {
+namespace kaos::reactor {
 
 static QImage make_placeholder() {
     QImage img(1, 1, QImage::Format_RGBA8888);
@@ -445,4 +445,4 @@ void PreviewWidget::rebuild_composite_pipeline() {
     composite_pipeline_->create();
 }
 
-} // namespace noise_reactor
+} // namespace kaos::reactor

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "noise_reactor/audio_analysis.h"
-#include "noise_reactor/effect_params.h"
+#include "kaos_reactor/audio_analysis.h"
+#include "kaos_reactor/effect_params.h"
 
 #include <QFutureWatcher>
 #include <QMainWindow>
@@ -17,7 +17,7 @@ QT_FORWARD_DECLARE_CLASS(QProcess)
 QT_FORWARD_DECLARE_CLASS(QProgressDialog)
 QT_FORWARD_DECLARE_CLASS(QPushButton)
 
-namespace noise_reactor {
+namespace kaos::reactor {
 
 class CinematicTargetWidget;
 class PreviewWidget;
@@ -83,4 +83,4 @@ private:
     QString          export_output_path_;
 };
 
-} // namespace noise_reactor
+} // namespace kaos::reactor

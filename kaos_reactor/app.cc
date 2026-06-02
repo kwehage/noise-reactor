@@ -1,11 +1,11 @@
-#include "noise_reactor/app.h"
+#include "kaos_reactor/app.h"
 
-#include "noise_reactor/cinematic_target_widget.h"
-#include "noise_reactor/audio_analyzer.h"
-#include "noise_reactor/audio_file.h"
-#include "noise_reactor/audio_frame_data.h"
-#include "noise_reactor/preview_widget.h"
-#include "noise_reactor/waveform_widget.h"
+#include "kaos_reactor/cinematic_target_widget.h"
+#include "kaos_reactor/audio_analyzer.h"
+#include "kaos_reactor/audio_file.h"
+#include "kaos_reactor/audio_frame_data.h"
+#include "kaos_reactor/preview_widget.h"
+#include "kaos_reactor/waveform_widget.h"
 
 #include <QAction>
 #include <QAudioOutput>
@@ -42,10 +42,10 @@
 #include <algorithm>
 #include <numeric>
 
-namespace noise_reactor {
+namespace kaos::reactor {
 
 App::App(QWidget* parent) : QMainWindow(parent) {
-    setWindowTitle("Noise Reactor");
+    setWindowTitle("Kaos Reactor");
     setMinimumSize(1280, 720);
 
     analysis_watcher_ = new QFutureWatcher<AudioAnalysis>(this);
@@ -842,4 +842,4 @@ void App::export_cleanup() {
     export_progress_ = nullptr;
 }
 
-} // namespace noise_reactor
+} // namespace kaos::reactor

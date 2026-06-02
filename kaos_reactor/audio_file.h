@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-namespace noise_reactor {
+namespace kaos::reactor {
 
 class AudioFile {
 public:
@@ -30,4 +30,4 @@ private:
     std::string error_;
 };
 
-} // namespace noise_reactor
+} // namespace kaos::reactor

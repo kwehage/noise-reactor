@@ -1,14 +1,14 @@
-# Noise Reactor
+# Kaos Reactor
 
 A desktop tool that turns an audio file and a static image into a music-reactive visual.
 
-![Noise Reactor](doc/noise_reactor.png)
+![Kaos Reactor](doc/kaos_reactor.png)
 
 ---
 
 ## How it works
 
-Noise Reactor analyzes the audio offline before playback begins. It runs a 2048-point FFT at 60 fps hops and extracts per-frame features — RMS energy, bass / mid / treble band energy, spectral centroid, spectral flux, beat events, and onset events. Those features are packed into a GPU uniform buffer each frame and drive a Vulkan fragment shader that applies effects in real time to the source image.
+Kaos Reactor analyzes the audio offline before playback begins. It runs a 2048-point FFT at 60 fps hops and extracts per-frame features — RMS energy, bass / mid / treble band energy, spectral centroid, spectral flux, beat events, and onset events. Those features are packed into a GPU uniform buffer each frame and drive a Vulkan fragment shader that applies effects in real time to the source image.
 
 The timeline scrubber lets you preview any moment of the audio-visual sync before committing to an export. Export pipes raw RGBA frames to ffmpeg via stdin, muxing the original audio into the final MP4.
 
@@ -136,18 +136,18 @@ Pre-built binaries are available on the [Releases](../../releases) page.
 
 ### Linux (AppImage)
 
-Download `noise-reactor-<version>-linux-x86_64.AppImage`, then:
+Download `kaos-reactor-<version>-linux-x86_64.AppImage`, then:
 
 ```bash
-chmod +x noise-reactor-*-linux-x86_64.AppImage
-./noise-reactor-*-linux-x86_64.AppImage
+chmod +x kaos-reactor-*-linux-x86_64.AppImage
+./kaos-reactor-*-linux-x86_64.AppImage
 ```
 
 No installation required. The AppImage is self-contained and runs on Ubuntu 24.04 and later (and compatible distros with glibc 2.39+).
 
 ### Windows
 
-Download `noise-reactor-<version>-windows-x86_64.zip`, extract the folder, and run `noise_reactor.exe` inside it. No installer — all required DLLs are included in the zip.
+Download `kaos-reactor-<version>-windows-x86_64.zip`, extract the folder, and run `kaos_reactor.exe` inside it. No installer — all required DLLs are included in the zip.
 
 Windows may show a SmartScreen warning ("Windows protected your PC") the first time you run an unsigned executable. Click **More info → Run anyway** to proceed.
 
@@ -169,7 +169,7 @@ The build compiles GLSL shaders to Qt shader bundles (`.qsb`) and embeds them in
 ## Run
 
 ```bash
-./build/noise_reactor
+./build/kaos_reactor
 ```
 
 Load audio and an image via **File → Open Audio / Open Image**, or drag and drop files directly onto the preview. Use the timeline scrubber to preview the sync, then export when ready.

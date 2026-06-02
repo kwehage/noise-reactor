@@ -1,11 +1,11 @@
-#include "noise_reactor/cinematic_target_widget.h"
+#include "kaos_reactor/cinematic_target_widget.h"
 
 #include <QMouseEvent>
 #include <QPainter>
 #include <QSizePolicy>
 #include <algorithm>
 
-namespace noise_reactor {
+namespace kaos::reactor {
 
 CinematicTargetWidget::CinematicTargetWidget(QWidget* parent) : QWidget(parent) {
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
@@ -87,4 +87,4 @@ void CinematicTargetWidget::update_from_pos(QPoint pos) {
     emit target_changed(target_);
 }
 
-} // namespace noise_reactor
+} // namespace kaos::reactor
