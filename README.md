@@ -156,8 +156,8 @@ Windows may show a SmartScreen warning ("Windows protected your PC") the first t
 ## Build
 
 ```bash
-git clone https://github.com/kwehage/noise-reactor.git
-cd noise-reactor
+git clone https://github.com/kwehage/kaos-reactor.git
+cd kaos-reactor
 meson setup build
 meson compile -C build
 ```
